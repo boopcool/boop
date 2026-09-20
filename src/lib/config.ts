@@ -17,6 +17,19 @@ export const SITE = {
 } as const;
 
 /**
+ * Site-ownership verification tokens, rendered as `<meta name content>` in the
+ * document head.
+ *
+ * These are public by design — the whole point is that a crawler can read them
+ * without authenticating — so they belong in source, not in the environment.
+ * They are scoped to this domain and grant nothing on their own.
+ */
+export const VERIFICATION: Record<string, string> = {
+  // Orynth listing ownership check.
+  "ory-verify": "orynth-6416b4117071402e8c3dcfb087afced2",
+};
+
+/**
  * Treats a blank environment variable as absent.
  *
  * A dashboard-defined variable with no value arrives as `""`, not `undefined`,

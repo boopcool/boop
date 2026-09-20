@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { SITE, siteUrl } from "@/lib/config";
+import { SITE, VERIFICATION, siteUrl } from "@/lib/config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -56,6 +56,8 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   robots: { index: true, follow: true },
+  // Renders one <meta name content> per entry, on every page.
+  verification: { other: VERIFICATION },
 };
 
 export const viewport: Viewport = {
