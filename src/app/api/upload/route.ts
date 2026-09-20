@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isSupabaseConfigured, LIMITS } from "@/lib/config";
+import { isSupabaseConfigured, LIMITS, storageBucket } from "@/lib/config";
 import { getViewer } from "@/lib/data/read";
 import {
   isAllowedImageType,
@@ -97,7 +97,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "Storage unavailable." }, { status: 503 });
   }
 
-  const bucket = process.env.SUPABASE_STORAGE_BUCKET ?? "boop-variants";
+  const bucket = storageBucket();
   const ext = sniffed === "image/png" ? "png" : sniffed === "image/webp" ? "webp" : "jpg";
   const key = `${viewer.profile.id}/${crypto.randomUUID()}.${ext}`;
 

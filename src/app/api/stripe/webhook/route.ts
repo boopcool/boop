@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { isStripeEnabled, packById } from "@/lib/config";
+import { cleanEnv, isStripeEnabled, packById } from "@/lib/config";
 import { supabaseAdmin } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -31,14 +31,14 @@ export async function POST(request: Request): Promise<NextResponse> {
   const raw = await request.text();
 
   const { default: StripeSdk } = await import("stripe");
-  const stripe = new StripeSdk(process.env.STRIPE_SECRET_KEY!);
+  const stripe = new StripeSdk(cleanEnv(process.env.STRIPE_SECRET_KEY)!);
 
   let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(
       raw,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      cleanEnv(process.env.STRIPE_WEBHOOK_SECRET)!,
     );
   } catch (error) {
     console.error(

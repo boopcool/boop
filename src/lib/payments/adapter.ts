@@ -1,6 +1,12 @@
 import "server-only";
 
-import { CURRENCY, isStripeEnabled, packById, siteUrl } from "@/lib/config";
+import {
+  cleanEnv,
+  CURRENCY,
+  isStripeEnabled,
+  packById,
+  siteUrl,
+} from "@/lib/config";
 import type { Profile } from "@/lib/types";
 
 /**
@@ -47,7 +53,7 @@ const stripeProvider: PaymentProvider = {
 
     try {
       const { default: Stripe } = await import("stripe");
-      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+      const stripe = new Stripe(cleanEnv(process.env.STRIPE_SECRET_KEY)!);
 
       const session = await stripe.checkout.sessions.create({
         mode: "payment",

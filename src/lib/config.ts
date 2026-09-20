@@ -16,15 +16,60 @@ export const SITE = {
   twitter: "@boopcool",
 } as const;
 
+/**
+ * Treats a blank environment variable as absent.
+ *
+ * A dashboard-defined variable with no value arrives as `""`, not `undefined`,
+ * so `??` silently accepts it — which is how an empty `NEXT_PUBLIC_SITE_URL`
+ * once reached `new URL("")` and failed a production build.
+ *
+ * Callers must pass `process.env.SOME_NAME` as a *static* member expression,
+ * never `process.env[name]`: Next.js inlines `NEXT_PUBLIC_*` at build time by
+ * matching that exact syntax, and a dynamic lookup would silently resolve to
+ * undefined in the browser.
+ */
+export function cleanEnv(value: string | undefined): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+/**
+ * Normalises a candidate origin, or returns null if it can't be one.
+ *
+ * Accepts a bare hostname (`boop.cool`) as well as a full URL, and discards
+ * any path or trailing slash, because `metadataBase` wants an origin.
+ */
+function toOrigin(value: string | undefined): string | null {
+  if (!value) return null;
+  const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  try {
+    return new URL(withProtocol).origin;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * The public origin, used for canonical URLs, OG images and share links.
+ *
+ * Always returns a valid absolute origin — callers pass this straight to
+ * `new URL()`, and a misconfigured variable must never be able to fail a
+ * build.
+ */
 export function siteUrl(): string {
-  const raw =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL
-      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : undefined) ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ??
-    "http://localhost:3000";
-  return raw.replace(/\/+$/, "");
+  const candidates = [
+    cleanEnv(process.env.NEXT_PUBLIC_SITE_URL),
+    cleanEnv(process.env.VERCEL_PROJECT_PRODUCTION_URL),
+    cleanEnv(process.env.VERCEL_URL),
+  ];
+
+  for (const candidate of candidates) {
+    const origin = toOrigin(candidate);
+    if (origin) return origin;
+  }
+
+  return "http://localhost:3000";
 }
 
 /* -------------------------------------------------------------------------- */
@@ -314,17 +359,31 @@ export const ROADMAP = [
 
 export function isStripeEnabled(): boolean {
   return Boolean(
-    process.env.STRIPE_SECRET_KEY && process.env.STRIPE_WEBHOOK_SECRET,
+    cleanEnv(process.env.STRIPE_SECRET_KEY) &&
+      cleanEnv(process.env.STRIPE_WEBHOOK_SECRET),
   );
 }
 
 export function isSupabaseConfigured(): boolean {
   return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
+      cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
   );
 }
 
 export function isOpenAIConfigured(): boolean {
-  return Boolean(process.env.OPENAI_API_KEY);
+  return Boolean(cleanEnv(process.env.OPENAI_API_KEY));
+}
+
+/** Storage bucket for variant images. */
+export function storageBucket(): string {
+  return cleanEnv(process.env.SUPABASE_STORAGE_BUCKET) ?? "boop-variants";
+}
+
+export function textModel(): string {
+  return cleanEnv(process.env.OPENAI_TEXT_MODEL) ?? "gpt-5.4-mini";
+}
+
+export function imageModel(): string {
+  return cleanEnv(process.env.OPENAI_IMAGE_MODEL) ?? "gpt-image-2.5-flare";
 }

@@ -2,6 +2,7 @@ import "server-only";
 
 import { createHmac, randomBytes } from "node:crypto";
 import { cookies } from "next/headers";
+import { cleanEnv } from "@/lib/config";
 
 export const ANON_COOKIE = "boop_anon";
 const ONE_YEAR = 60 * 60 * 24 * 365;
@@ -22,7 +23,7 @@ const ONE_YEAR = 60 * 60 * 24 * 365;
  */
 
 function pepper(): string {
-  const secret = process.env.ANON_HASH_SECRET;
+  const secret = cleanEnv(process.env.ANON_HASH_SECRET);
   if (secret) return secret;
 
   // Dev fallback so the app runs with an empty .env. Logged once, loudly,

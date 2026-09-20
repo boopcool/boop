@@ -1,6 +1,6 @@
 import "server-only";
 
-import { isOpenAIConfigured } from "@/lib/config";
+import { cleanEnv, isOpenAIConfigured, textModel } from "@/lib/config";
 import type { AiSummary, TestResults } from "@/lib/types";
 
 /**
@@ -204,13 +204,13 @@ export async function summarizeFeedback(
   try {
     const { default: OpenAI } = await import("openai");
     const client = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY!,
+      apiKey: cleanEnv(process.env.OPENAI_API_KEY)!,
       timeout: 25_000,
       maxRetries: 1,
     });
 
     const response = await client.responses.create({
-      model: process.env.OPENAI_TEXT_MODEL ?? "gpt-5.4-mini",
+      model: textModel(),
       instructions: SYSTEM_PROMPT,
       input: buildUserPrompt(results),
       text: {

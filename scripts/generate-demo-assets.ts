@@ -39,7 +39,7 @@ async function writeSvgs(): Promise<number> {
  * its SVG — the app is never left pointing at a file that doesn't exist.
  */
 async function writeAiImages(): Promise<void> {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
   if (!apiKey) {
     console.log(
       "· --ai requested but OPENAI_API_KEY is not set. Skipping image generation.",
@@ -49,7 +49,8 @@ async function writeAiImages(): Promise<void> {
 
   const { default: OpenAI } = await import("openai");
   const client = new OpenAI({ apiKey, timeout: 180_000, maxRetries: 1 });
-  const model = process.env.OPENAI_IMAGE_MODEL ?? "gpt-image-2.5-flare";
+  const model =
+    process.env.OPENAI_IMAGE_MODEL?.trim() || "gpt-image-2.5-flare";
 
   const assets: Record<string, string> = {};
   const entries = Object.entries(IMAGE_PROMPTS);
