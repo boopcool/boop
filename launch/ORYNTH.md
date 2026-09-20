@@ -91,31 +91,25 @@ SaaS · Productivity · Design Tools · Marketing Tools
 
 ---
 
-## Suggested screenshots (5, in order)
+## Screenshots (ready to upload)
 
-1. **The homepage hero with the interactive demo mid-reveal.**
-   67% / 33%, winner badge, "High confidence", reason chips visible. This is the
-   whole product in one frame — lead with it.
+All eight live in `launch/assets/`, as 2× PNG masters plus sub-250KB JPEGs in
+`launch/assets/web/` for forms with size limits. Every one is a real screenshot
+of the running product — see `launch/assets/README.md` for the full index.
 
-2. **The feed, mid-decision.**
-   Two variants side by side, question above, keyboard shortcut rail on the
-   right. Shows that giving feedback takes seconds, which is the half of the
-   loop people don't expect.
+| Slot | File | Why it's in this position |
+| --- | --- | --- |
+| Hero | `01-hero.png` (or `01b-hero-alt.png`) | Tagline plus the actual results headline — "B wins — 67%" with its confidence interval — at full legibility. |
+| 1 | `02-showcase.png` | The whole loop in one frame: the question, the A/B decision, the result. |
+| 2 | `03-compare.png` | The feed mid-decision. Shows that giving feedback takes seconds, which is the half people don't expect. |
+| 3 | `04-results.png` | The split with confidence whiskers and the AI summary panel, badge visible. The whiskers are the differentiator — don't crop them. |
+| 4 | `05-five-second-test.png` | The countdown running. Reads as a distinct product, not a setting. |
+| 5 | `06-create.png` | The builder mid-flow, proving the "under a minute" claim rather than asserting it. |
+| Thumbnail | `10-thumbnail.png` | The mark alone on black, 512×512. |
+| OG card | `09-social-card.png` | 1200×630 for the link preview. |
 
-3. **A results page, full width.**
-   "B wins — 67%", the split with confidence whiskers, reason breakdown, and the
-   AI summary panel with its "Model-written" badge and the disclaimer visible.
-   The whiskers are the differentiator; don't crop them out.
-
-4. **The 5 Second Test, at the recall question.**
-   Black "Time's up" state with "What does this product do?" and the empty
-   answer field. It reads as a distinct product, not a setting.
-
-5. **The create wizard on step 2 or 5.**
-   Either the two dropzones or the response-count picker with the live credit
-   cost. Proves the "under a minute" claim rather than asserting it.
-
----
+Spares if the listing allows more: `07-pricing.png` (the credit loop) and
+`08-mobile.png` (two phones, real captures at 390px).
 
 ## Suggested launch post for X
 
@@ -163,8 +157,8 @@ Square, 240×240, and it has to survive being 48px in a list.
   64px.
 - No wordmark, no gradient, no drop shadow, no 3D. The mark alone.
 
-The mark is already built for this. `public/brand/favicon.svg` is the
-small-size cut; scale it up rather than redrawing.
+Already built: `launch/assets/10-thumbnail.png` is exactly this, at 512×512.
+`public/brand/favicon.svg` is the small-size cut of the same mark.
 
 If the listing supports a wide banner instead, use the black type-only
 treatment: "Know what people pick before you ship." set large in white on
