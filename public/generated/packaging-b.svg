@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" role="img">
+<defs>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.045"/></feComponentTransfer>
+  </filter>
+</defs>
+<rect width="900" height="900" fill="#ffffff"/>
+<rect x="0" y="0" width="900" height="900" fill="#f7f7f5"/>
+<ellipse cx="450" cy="776" rx="208" ry="14" fill="#111111" opacity="0.06"/>
+<path d="M 260 180 L 300 150 L 600 150 L 640 180 L 640 750 L 260 750 Z" fill="#ffffff" stroke="#e4e4e1"/>
+<path d="M 260 180 L 300 150 L 600 150 L 640 180 Z" fill="#f7f7f5" stroke="#e4e4e1"/>
+<circle cx="450" cy="364" r="92" fill="none" stroke="#111111" stroke-width="3"/>
+<circle cx="450" cy="364" r="46" fill="#111111"/>
+<path d="M 358 364 A 92 92 0 0 1 542 364" fill="#111111" opacity="0.1"/>
+<text x="450" y="522" font-family="Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="26" font-weight="500" fill="#111111" text-anchor="middle" letter-spacing="1.6">SLOW MORNING</text>
+<line x1="350" y1="552" x2="550" y2="552" stroke="#e4e4e1"/>
+<text x="450" y="588" font-family="Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="13" font-weight="400" fill="#8a8a87" text-anchor="middle" letter-spacing="0">Ethiopia · Guji · Washed</text>
+<text x="450" y="618" font-family="Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="13" font-weight="400" fill="#8a8a87" text-anchor="middle" letter-spacing="0">Jasmine, peach, black tea</text>
+<rect x="408" y="670" width="84" height="30" rx="15" fill="#111111"/>
+<text x="450" y="690" font-family="Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="12" font-weight="500" fill="#ffffff" text-anchor="middle" letter-spacing="0">250g</text>
+<line x1="639" y1="180" x2="639" y2="750" stroke="#e4e4e1"/>
+<rect width="900" height="900" filter="url(#grain)" opacity="0.5" style="mix-blend-mode:multiply"/>
+<rect x="0.5" y="0.5" width="899" height="899" fill="none" stroke="#e4e4e1"/>
+</svg>

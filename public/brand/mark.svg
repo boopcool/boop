@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Boop mark">
+  <title>Boop</title>
+  <!-- Contact ripple: the moment two things meet. -->
+  <circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="1" opacity="0.22"/>
+  <!-- The two approaching bodies. -->
+  <circle cx="9.5" cy="16" r="4.5" fill="currentColor"/>
+  <circle cx="22.5" cy="16" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/>
+  <!-- The contact point. -->
+  <circle cx="16" cy="16" r="1.6" fill="currentColor"/>
+</svg>

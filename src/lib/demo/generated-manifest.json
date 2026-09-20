@@ -1,0 +1,4 @@
+{
+  "note": "Overrides for demo artwork, written by `npm run generate:assets -- --ai`. Ships empty on purpose — see the warning that script prints.",
+  "assets": {}
+}

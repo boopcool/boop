@@ -1,0 +1,40 @@
+# dependencies
+node_modules
+.pnp
+.pnp.*
+
+# next
+.next
+out
+build
+next-env.d.ts
+
+# env — never commit real secrets
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# AI-generated demo art (optional upgrade over the committed SVGs;
+# regenerate with `npm run generate:assets -- --ai`).
+# The manifest itself IS committed — seed-data.ts imports it, so a clone
+# without it would not build. It ships with an empty `assets` object.
+public/generated/*.png
+public/generated/*.jpg
+public/generated/*.webp
+
+# misc
+.DS_Store
+*.pem
+.vercel
+.turbo
+coverage
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.idea
+.vscode/*
+!.vscode/extensions.json
